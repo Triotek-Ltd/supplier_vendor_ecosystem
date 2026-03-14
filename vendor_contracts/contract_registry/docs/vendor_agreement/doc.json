@@ -1,0 +1,27 @@
+{
+  "doc_key": "vendor_agreement",
+  "doc_title": "Vendor Agreement",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "vendor_contracts",
+  "submodule_id": "contract_registry",
+  "app_id": "supplier_vendor_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "supplier_vendor_ecosystem",
+    "module": "vendor_contracts",
+    "submodule": "contract_registry",
+    "reference_doc_id": "vendor_agreement",
+    "evidence_gaps": [
+      "amendment model",
+      "obligation extraction rules"
+    ]
+  }
+}

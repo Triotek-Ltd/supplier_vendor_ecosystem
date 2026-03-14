@@ -1,0 +1,8 @@
+{
+  "id": "service_levels",
+  "title": "Service Levels",
+  "app_id": "supplier_vendor_ecosystem",
+  "module_id": "vendor_contracts",
+  "type": "submodule",
+  "status": "draft"
+}

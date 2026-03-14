@@ -1,0 +1,104 @@
+{
+  "doc_id": "vendor_portal_account",
+  "doc_title": "Vendor Portal Account",
+  "archetype": "master",
+  "doc_kind": "master",
+  "actions": [
+    "create",
+    "provision",
+    "activate",
+    "suspend",
+    "archive"
+  ],
+  "lifecycle": {
+    "initial_state": "requested",
+    "states": [
+      "requested",
+      "provisioned",
+      "active",
+      "suspended",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ]
+  },
+  "related_doc_count": 3,
+  "fetch_rule_count": 0,
+  "action_handler_count": 5,
+  "archetype_profile": {
+    "workflow_profile": {
+      "mode": "entity_lifecycle",
+      "case_management": false
+    },
+    "reporting_profile": {
+      "supports_snapshots": false,
+      "supports_outputs": false
+    },
+    "integration_profile": {
+      "external_sync_enabled": false
+    },
+    "lifecycle_states": [
+      "requested",
+      "provisioned",
+      "active",
+      "suspended",
+      "archived"
+    ],
+    "is_transactional": false
+  },
+  "contract_summary": {
+    "title_field": "title",
+    "status_field": "workflow_state",
+    "reference_field": "reference_no",
+    "required_fields": [
+      "title",
+      "workflow_state"
+    ],
+    "field_purposes": {
+      "workflow_state": "lifecycle_state",
+      "account_status": "status_flag"
+    },
+    "search_fields": [
+      "title",
+      "reference_no",
+      "description",
+      "account_code",
+      "vendor_reference",
+      "portal_identity"
+    ],
+    "list_columns": [
+      "title",
+      "reference_no",
+      "workflow_state",
+      "modified"
+    ],
+    "initial_state": "requested",
+    "lifecycle_states": [
+      "requested",
+      "provisioned",
+      "active",
+      "suspended",
+      "archived"
+    ],
+    "terminal_states": [
+      "archived"
+    ],
+    "action_targets": {
+      "create": null,
+      "provision": null,
+      "activate": "active",
+      "suspend": null,
+      "archive": "archived"
+    }
+  },
+  "workflow_hints": {},
+  "related_docs": [
+    "collaboration_request",
+    "partner_issue_case",
+    "supplier_capability_profile"
+  ],
+  "borrowed_fields": [
+    "vendor identity from linked partner/profile records"
+  ]
+}

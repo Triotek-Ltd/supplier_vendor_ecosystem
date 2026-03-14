@@ -1,0 +1,27 @@
+{
+  "doc_key": "contract_review_case",
+  "doc_title": "Contract Review Case",
+  "doc_kind": "workflow_case",
+  "status": "draft",
+  "module_id": "vendor_contracts",
+  "submodule_id": "contract_registry",
+  "app_id": "supplier_vendor_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "workflow_case",
+  "classification": {
+    "archetype": "workflow_case",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "supplier_vendor_ecosystem",
+    "module": "vendor_contracts",
+    "submodule": "contract_registry",
+    "reference_doc_id": "contract_review_case",
+    "evidence_gaps": [
+      "review cadence",
+      "amendment approval routing"
+    ]
+  }
+}

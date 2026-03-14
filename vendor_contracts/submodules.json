@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "contract_registry",
+    "service_levels"
+  ]
+}

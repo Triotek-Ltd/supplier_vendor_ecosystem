@@ -1,0 +1,8 @@
+{
+  "id": "vendor_collaboration",
+  "title": "Vendor Collaboration",
+  "app_id": "supplier_vendor_ecosystem",
+  "type": "module",
+  "status": "draft",
+  "supports_submodules": true
+}

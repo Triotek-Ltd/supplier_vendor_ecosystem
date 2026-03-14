@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "partner_issues",
+    "portal_accounts"
+  ]
+}

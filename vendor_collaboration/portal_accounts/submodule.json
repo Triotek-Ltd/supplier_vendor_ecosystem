@@ -1,0 +1,8 @@
+{
+  "id": "portal_accounts",
+  "title": "Portal Accounts",
+  "app_id": "supplier_vendor_ecosystem",
+  "module_id": "vendor_collaboration",
+  "type": "submodule",
+  "status": "draft"
+}

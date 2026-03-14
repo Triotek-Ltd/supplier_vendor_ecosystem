@@ -1,0 +1,27 @@
+{
+  "doc_key": "collaboration_request",
+  "doc_title": "Collaboration Request",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "vendor_collaboration",
+  "submodule_id": "portal_accounts",
+  "app_id": "supplier_vendor_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "supplier_vendor_ecosystem",
+    "module": "vendor_collaboration",
+    "submodule": "portal_accounts",
+    "reference_doc_id": "collaboration_request",
+    "evidence_gaps": [
+      "request-type taxonomy",
+      "SLA model"
+    ]
+  }
+}

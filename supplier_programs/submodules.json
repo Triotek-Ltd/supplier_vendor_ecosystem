@@ -1,0 +1,6 @@
+{
+  "submodules": [
+    "supplier_compliance",
+    "supplier_onboarding"
+  ]
+}

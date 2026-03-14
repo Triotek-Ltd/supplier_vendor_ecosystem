@@ -1,0 +1,27 @@
+{
+  "doc_key": "supplier_compliance_record",
+  "doc_title": "Supplier Compliance Record",
+  "doc_kind": "transaction",
+  "status": "draft",
+  "module_id": "supplier_programs",
+  "submodule_id": "supplier_compliance",
+  "app_id": "supplier_vendor_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "transaction",
+  "classification": {
+    "archetype": "transaction",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "supplier_vendor_ecosystem",
+    "module": "supplier_programs",
+    "submodule": "supplier_compliance",
+    "reference_doc_id": "supplier_compliance_record",
+    "evidence_gaps": [
+      "evidence taxonomy",
+      "expiry/reminder rules"
+    ]
+  }
+}

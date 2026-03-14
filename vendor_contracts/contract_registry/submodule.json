@@ -1,0 +1,8 @@
+{
+  "id": "contract_registry",
+  "title": "Contract Registry",
+  "app_id": "supplier_vendor_ecosystem",
+  "module_id": "vendor_contracts",
+  "type": "submodule",
+  "status": "draft"
+}

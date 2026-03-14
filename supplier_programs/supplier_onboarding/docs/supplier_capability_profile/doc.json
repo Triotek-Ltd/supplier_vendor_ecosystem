@@ -1,0 +1,27 @@
+{
+  "doc_key": "supplier_capability_profile",
+  "doc_title": "Supplier Capability Profile",
+  "doc_kind": "master",
+  "status": "draft",
+  "module_id": "supplier_programs",
+  "submodule_id": "supplier_onboarding",
+  "app_id": "supplier_vendor_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "master",
+  "classification": {
+    "archetype": "master",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "supplier_vendor_ecosystem",
+    "module": "supplier_programs",
+    "submodule": "supplier_onboarding",
+    "reference_doc_id": "supplier_capability_profile",
+    "evidence_gaps": [
+      "capability taxonomy",
+      "region/service granularity"
+    ]
+  }
+}

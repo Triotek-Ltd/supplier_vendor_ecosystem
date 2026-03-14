@@ -1,0 +1,7 @@
+{
+  "modules": [
+    "supplier_programs",
+    "vendor_collaboration",
+    "vendor_contracts"
+  ]
+}

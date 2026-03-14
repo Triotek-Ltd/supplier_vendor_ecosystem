@@ -1,0 +1,27 @@
+{
+  "doc_key": "service_level_record",
+  "doc_title": "Service Level Record",
+  "doc_kind": "ledger",
+  "status": "draft",
+  "module_id": "vendor_contracts",
+  "submodule_id": "service_levels",
+  "app_id": "supplier_vendor_ecosystem",
+  "base_action_profile": "base_record_actions",
+  "doc_archetype": "ledger",
+  "classification": {
+    "archetype": "ledger",
+    "bundle": "ecosystem"
+  },
+  "planning_source": {
+    "type": "reference_doc_generation_manifest",
+    "bundle": "ecosystem",
+    "app": "supplier_vendor_ecosystem",
+    "module": "vendor_contracts",
+    "submodule": "service_levels",
+    "reference_doc_id": "service_level_record",
+    "evidence_gaps": [
+      "metric taxonomy",
+      "breach-threshold rules"
+    ]
+  }
+}
