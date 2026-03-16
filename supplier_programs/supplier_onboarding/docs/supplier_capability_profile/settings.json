@@ -33,7 +33,32 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_supplier_onboarding_case",
+      "doc_id": "supplier_onboarding_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_supplier_compliance_record",
+      "doc_id": "supplier_compliance_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_vendor_agreement",
+      "doc_id": "vendor_agreement",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_supplier_profile",
+      "doc_id": "supplier_profile",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -41,7 +66,12 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "supplier_onboarding_case",
+      "supplier_compliance_record",
+      "vendor_agreement",
+      "supplier_profile"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -62,6 +92,44 @@
   "runtime_hints": {
     "doc_key": "supplier_capability_profile",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "supplier_onboarding_case",
+          "supplier_compliance_record",
+          "vendor_agreement",
+          "supplier_profile"
+        ],
+        "borrowed_fields": [
+          "supplier master context from operations supplier docs where unified"
+        ],
+        "inferred_roles": [
+          "compliance officer",
+          "procurement officer",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "compliance officer",
+        "procurement officer",
+        "case owner"
+      ],
+      "action_actors": {
+        "create": [
+          "compliance officer"
+        ],
+        "update": [
+          "compliance officer"
+        ],
+        "review": [
+          "procurement officer"
+        ],
+        "archive": [
+          "case owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

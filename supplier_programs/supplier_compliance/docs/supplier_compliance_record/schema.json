@@ -356,6 +356,78 @@
         "filterable": true,
         "sortable": true
       }
+    },
+    {
+      "field_id": "related_supplier_onboarding_case",
+      "label": "Related Supplier Onboarding Case",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "supplier_onboarding_case",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_supplier_capability_profile",
+      "label": "Related Supplier Capability Profile",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "supplier_capability_profile",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
+    },
+    {
+      "field_id": "related_vendor_review",
+      "label": "Related Vendor Review",
+      "type": "Table MultiSelect",
+      "required": false,
+      "read_only": false,
+      "default": null,
+      "unique": false,
+      "options": null,
+      "purpose": "relation_collection",
+      "linked_doc": "vendor_review",
+      "depends_on": null,
+      "mandatory_depends_on": null,
+      "read_only_depends_on": null,
+      "fetch_from": null,
+      "allow_on_submit": false,
+      "indexed": false,
+      "ui": {
+        "visible": false,
+        "list_visible": false,
+        "filterable": false,
+        "sortable": false
+      }
     }
   ],
   "field_groups": {
@@ -379,7 +451,11 @@
       "evidence_summary",
       "compliance_state"
     ],
-    "relations": [],
+    "relations": [
+      "related_supplier_onboarding_case",
+      "related_supplier_capability_profile",
+      "related_vendor_review"
+    ],
     "amounts": [
       "currency",
       "total_amount"
@@ -468,16 +544,36 @@
     {
       "role_id": "System Manager",
       "actions": [
-        "create",
-        "update",
         "view",
         "list",
-        "record",
+        "create",
         "review",
-        "assign",
-        "track",
-        "monitor",
-        "confirm",
+        "renew",
+        "expire",
+        "archive"
+      ]
+    },
+    {
+      "role_id": "compliance officer",
+      "actions": [
+        "view",
+        "list",
+        "create"
+      ]
+    },
+    {
+      "role_id": "procurement officer",
+      "actions": [
+        "view",
+        "list",
+        "review"
+      ]
+    },
+    {
+      "role_id": "case owner",
+      "actions": [
+        "view",
+        "list",
         "archive"
       ]
     }

@@ -11,7 +11,7 @@ TERMINAL_STATES = ['archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled'], 'transitions_to': 'in_progress'}, 'accept': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled'], 'transitions_to': None}, 'complete': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled'], 'transitions_to': None}, 'cancel': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled'], 'transitions_to': None}, 'archive': {'allowed_in_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['vendor_portal_account', 'partner_issue_case', 'purchase_order', 'external_fulfillment_order'], 'borrowed_fields': ['vendor/account context from vendor_portal_account', 'business refs from operations/logistics docs'], 'inferred_roles': ['procurement officer', 'account owner', 'operations coordinator', 'case owner']}, 'actors': ['procurement officer', 'account owner', 'operations coordinator', 'case owner'], 'action_actors': {'create': ['procurement officer'], 'assign': ['procurement officer'], 'cancel': ['account owner'], 'archive': ['account owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

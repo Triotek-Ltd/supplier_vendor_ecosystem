@@ -11,7 +11,7 @@ TERMINAL_STATES = ['closed', 'archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': 'in_review'}, 'review': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': 'in_review'}, 'amend': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': None}, 'renew': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': 'renewed'}, 'close': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['opened', 'in_review', 'renewed', 'amended'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['vendor_agreement', 'service_level_record', 'partner_issue_case'], 'borrowed_fields': ['agreement terms', 'dates from vendor_agreement'], 'inferred_roles': ['compliance officer', 'procurement officer', 'case owner']}, 'actors': ['compliance officer', 'procurement officer', 'case owner'], 'action_actors': {'create': ['compliance officer'], 'assign': ['compliance officer'], 'review': ['procurement officer'], 'close': ['case owner'], 'archive': ['case owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

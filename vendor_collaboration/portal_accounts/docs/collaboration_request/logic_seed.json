@@ -66,7 +66,11 @@
       "party": "primary_party",
       "currency": "currency_code",
       "total_amount": "total_amount",
-      "due_date": "schedule_marker"
+      "due_date": "schedule_marker",
+      "related_vendor_portal_account": "relation_collection",
+      "related_partner_issue_case": "relation_collection",
+      "related_purchase_order": "relation_collection",
+      "related_external_fulfillment_order": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -105,7 +109,48 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "vendor_portal_account",
+        "partner_issue_case",
+        "purchase_order",
+        "external_fulfillment_order"
+      ],
+      "borrowed_fields": [
+        "vendor/account context from vendor_portal_account",
+        "business refs from operations/logistics docs"
+      ],
+      "inferred_roles": [
+        "procurement officer",
+        "account owner",
+        "operations coordinator",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "procurement officer",
+      "account owner",
+      "operations coordinator",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "procurement officer"
+      ],
+      "assign": [
+        "procurement officer"
+      ],
+      "cancel": [
+        "account owner"
+      ],
+      "archive": [
+        "account owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "vendor_portal_account",
     "partner_issue_case",

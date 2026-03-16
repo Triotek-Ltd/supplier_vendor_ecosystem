@@ -28,7 +28,26 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_vendor_agreement",
+      "doc_id": "vendor_agreement",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_service_level_record",
+      "doc_id": "service_level_record",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_partner_issue_case",
+      "doc_id": "partner_issue_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -36,7 +55,11 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "vendor_agreement",
+      "service_level_record",
+      "partner_issue_case"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -60,6 +83,47 @@
   "runtime_hints": {
     "doc_key": "contract_review_case",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "vendor_agreement",
+          "service_level_record",
+          "partner_issue_case"
+        ],
+        "borrowed_fields": [
+          "agreement terms",
+          "dates from vendor_agreement"
+        ],
+        "inferred_roles": [
+          "compliance officer",
+          "procurement officer",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "compliance officer",
+        "procurement officer",
+        "case owner"
+      ],
+      "action_actors": {
+        "create": [
+          "compliance officer"
+        ],
+        "assign": [
+          "compliance officer"
+        ],
+        "review": [
+          "procurement officer"
+        ],
+        "close": [
+          "case owner"
+        ],
+        "archive": [
+          "case owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

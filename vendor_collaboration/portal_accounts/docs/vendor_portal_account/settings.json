@@ -28,7 +28,26 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_collaboration_request",
+      "doc_id": "collaboration_request",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_partner_issue_case",
+      "doc_id": "partner_issue_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_supplier_capability_profile",
+      "doc_id": "supplier_capability_profile",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -36,7 +55,11 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "collaboration_request",
+      "partner_issue_case",
+      "supplier_capability_profile"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -57,6 +80,38 @@
   "runtime_hints": {
     "doc_key": "vendor_portal_account",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "collaboration_request",
+          "partner_issue_case",
+          "supplier_capability_profile"
+        ],
+        "borrowed_fields": [
+          "vendor identity from linked partner/profile records"
+        ],
+        "inferred_roles": [
+          "procurement officer",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "procurement officer",
+        "case owner"
+      ],
+      "action_actors": {
+        "create": [
+          "procurement officer"
+        ],
+        "activate": [
+          "case owner"
+        ],
+        "archive": [
+          "case owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

@@ -11,7 +11,7 @@ TERMINAL_STATES = ['closed', 'archived']
 ACTION_RULES = {'create': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': None}, 'assign': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'in_progress'}, 'triage': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': None}, 'resolve': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'resolved'}, 'escalate': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'escalated'}, 'close': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'closed'}, 'archive': {'allowed_in_states': ['opened', 'triaged', 'in_progress', 'resolved', 'escalated'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['vendor_portal_account', 'collaboration_request', 'contract_review_case', 'delivery_exception_case'], 'borrowed_fields': ['vendor', 'contract context from linked records'], 'inferred_roles': ['compliance officer', 'procurement officer', 'operations coordinator', 'case owner']}, 'actors': ['compliance officer', 'procurement officer', 'operations coordinator', 'case owner'], 'action_actors': {'create': ['compliance officer'], 'assign': ['compliance officer'], 'close': ['case owner'], 'archive': ['case owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

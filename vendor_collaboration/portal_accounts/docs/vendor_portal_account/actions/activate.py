@@ -8,7 +8,7 @@ ACTION_ID = "activate"
 ACTION_RULE = {'allowed_in_states': ['requested'], 'transitions_to': 'active'}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['collaboration_request', 'partner_issue_case', 'supplier_capability_profile'], 'borrowed_fields': ['vendor identity from linked partner/profile records'], 'inferred_roles': ['procurement officer', 'case owner']}, 'actors': ['procurement officer', 'case owner'], 'action_actors': {'create': ['procurement officer'], 'activate': ['case owner'], 'archive': ['case owner']}}
 
 def handle_activate(payload: dict, context: dict | None = None) -> dict:
     context = context or {}

@@ -56,7 +56,11 @@
         "measured_period",
         "attainment_state"
       ],
-      "relations": [],
+      "relations": [
+        "related_vendor_agreement",
+        "related_contract_review_case",
+        "related_vendor_review"
+      ],
       "amounts": [],
       "dates": [
         "posting_date"
@@ -336,6 +340,78 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_vendor_agreement",
+        "label": "Related Vendor Agreement",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "vendor_agreement",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_contract_review_case",
+        "label": "Related Contract Review Case",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "contract_review_case",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_vendor_review",
+        "label": "Related Vendor Review",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "vendor_review",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -404,16 +480,34 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
           "record",
           "review",
-          "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "compliance officer",
+        "actions": [
+          "view",
+          "list",
+          "record"
+        ]
+      },
+      {
+        "role_id": "procurement officer",
+        "actions": [
+          "view",
+          "list",
+          "review"
+        ]
+      },
+      {
+        "role_id": "case owner",
+        "actions": [
+          "view",
+          "list",
           "archive"
         ]
       }
@@ -492,7 +586,26 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_vendor_agreement",
+        "doc_id": "vendor_agreement",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_contract_review_case",
+        "doc_id": "contract_review_case",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_vendor_review",
+        "doc_id": "vendor_review",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -500,7 +613,11 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "vendor_agreement",
+        "contract_review_case",
+        "vendor_review"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -524,7 +641,42 @@
     "runtime_hints": {
       "doc_key": "service_level_record",
       "supports_related_lookup": true,
-      "supports_fetch_rules": true
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "relation_context": {
+          "related_docs": [
+            "vendor_agreement",
+            "contract_review_case",
+            "vendor_review"
+          ],
+          "borrowed_fields": [
+            "SLA targets",
+            "vendor identity from vendor_agreement"
+          ],
+          "inferred_roles": [
+            "compliance officer",
+            "procurement officer",
+            "case owner"
+          ]
+        },
+        "actors": [
+          "compliance officer",
+          "procurement officer",
+          "case owner"
+        ],
+        "action_actors": {
+          "record": [
+            "compliance officer"
+          ],
+          "review": [
+            "procurement officer"
+          ],
+          "archive": [
+            "case owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -600,6 +752,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -615,6 +770,38 @@
       "doc_kind": "ledger"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/supplier_vendor_ecosystem/vendor_contracts/service_levels/service_level_record/",
+    "status_field": "workflow_state",
+    "initial_state": "active",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "posting_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "review",
+        "source_state": "active",
+        "target_state": "reviewed",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "active",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "vendor_agreement",
+      "contract_review_case",
+      "vendor_review"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -622,7 +809,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

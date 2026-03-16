@@ -1,7 +1,7 @@
 {
   "docs": [
-    "supplier_compliance_record",
     "supplier_capability_profile",
+    "supplier_compliance_record",
     "supplier_onboarding_case"
   ]
 }

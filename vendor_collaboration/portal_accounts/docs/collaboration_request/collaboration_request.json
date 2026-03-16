@@ -69,7 +69,12 @@
         "source_business_reference",
         "collaboration_state"
       ],
-      "relations": [],
+      "relations": [
+        "related_vendor_portal_account",
+        "related_partner_issue_case",
+        "related_purchase_order",
+        "related_external_fulfillment_order"
+      ],
       "amounts": [
         "currency",
         "total_amount"
@@ -430,6 +435,102 @@
           "filterable": true,
           "sortable": true
         }
+      },
+      {
+        "field_id": "related_vendor_portal_account",
+        "label": "Related Vendor Portal Account",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "vendor_portal_account",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_partner_issue_case",
+        "label": "Related Partner Issue Case",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "partner_issue_case",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_purchase_order",
+        "label": "Related Purchase Order",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "purchase_order",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
+      },
+      {
+        "field_id": "related_external_fulfillment_order",
+        "label": "Related External Fulfillment Order",
+        "type": "Table MultiSelect",
+        "required": false,
+        "read_only": false,
+        "default": null,
+        "unique": false,
+        "options": null,
+        "purpose": "relation_collection",
+        "linked_doc": "external_fulfillment_order",
+        "depends_on": null,
+        "mandatory_depends_on": null,
+        "read_only_depends_on": null,
+        "fetch_from": null,
+        "allow_on_submit": false,
+        "indexed": false,
+        "ui": {
+          "visible": false,
+          "list_visible": false,
+          "filterable": false,
+          "sortable": false
+        }
       }
     ],
     "title_field": "title",
@@ -540,17 +641,46 @@
       {
         "role_id": "System Manager",
         "actions": [
-          "create",
-          "update",
           "view",
           "list",
-          "record",
-          "review",
+          "create",
           "assign",
-          "track",
-          "monitor",
-          "confirm",
+          "accept",
+          "complete",
+          "cancel",
           "archive"
+        ]
+      },
+      {
+        "role_id": "procurement officer",
+        "actions": [
+          "view",
+          "list",
+          "create",
+          "assign"
+        ]
+      },
+      {
+        "role_id": "account owner",
+        "actions": [
+          "view",
+          "list",
+          "cancel",
+          "archive"
+        ]
+      },
+      {
+        "role_id": "operations coordinator",
+        "actions": [
+          "view",
+          "list"
+        ]
+      },
+      {
+        "role_id": "case owner",
+        "actions": [
+          "view",
+          "list"
         ]
       }
     ],
@@ -639,7 +769,32 @@
         "show_in_related_panel": true
       }
     ],
-    "lookup_rules": [],
+    "lookup_rules": [
+      {
+        "field_id": "related_vendor_portal_account",
+        "doc_id": "vendor_portal_account",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_partner_issue_case",
+        "doc_id": "partner_issue_case",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_purchase_order",
+        "doc_id": "purchase_order",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      },
+      {
+        "field_id": "related_external_fulfillment_order",
+        "doc_id": "external_fulfillment_order",
+        "lookup_mode": "multiple",
+        "purpose": "relation_collection"
+      }
+    ],
     "fetch_rules": [],
     "reference_map": {
       "primary_reference_field": "reference_no",
@@ -647,7 +802,12 @@
     },
     "relation_rules": {
       "parent_doc": null,
-      "child_docs": [],
+      "child_docs": [
+        "vendor_portal_account",
+        "partner_issue_case",
+        "purchase_order",
+        "external_fulfillment_order"
+      ],
       "show_related_panel": true
     },
     "borrowed_fields": [
@@ -671,7 +831,48 @@
     "runtime_hints": {
       "doc_key": "collaboration_request",
       "supports_related_lookup": true,
-      "supports_fetch_rules": true
+      "supports_fetch_rules": true,
+      "workflow_hints": {
+        "relation_context": {
+          "related_docs": [
+            "vendor_portal_account",
+            "partner_issue_case",
+            "purchase_order",
+            "external_fulfillment_order"
+          ],
+          "borrowed_fields": [
+            "vendor/account context from vendor_portal_account",
+            "business refs from operations/logistics docs"
+          ],
+          "inferred_roles": [
+            "procurement officer",
+            "account owner",
+            "operations coordinator",
+            "case owner"
+          ]
+        },
+        "actors": [
+          "procurement officer",
+          "account owner",
+          "operations coordinator",
+          "case owner"
+        ],
+        "action_actors": {
+          "create": [
+            "procurement officer"
+          ],
+          "assign": [
+            "procurement officer"
+          ],
+          "cancel": [
+            "account owner"
+          ],
+          "archive": [
+            "account owner"
+          ]
+        }
+      },
+      "action_side_effects_file": "side_effects.json"
     }
   },
   "classification": {
@@ -751,6 +952,9 @@
       "reports": "reports/service.py",
       "integrations": "integrations/service.py"
     },
+    "runtime_contract": {
+      "side_effects_file": "side_effects.json"
+    },
     "action_handlers": {
       "base_dir": "actions",
       "registry": "actions/registry.py",
@@ -769,6 +973,39 @@
       "doc_kind": "transaction"
     }
   },
+  "testing": {
+    "seeded": true,
+    "api_base_path": "/apis/supplier_vendor_ecosystem/vendor_collaboration/portal_accounts/collaboration_request/",
+    "status_field": "workflow_state",
+    "initial_state": "opened",
+    "required_fields": [
+      "title",
+      "workflow_state",
+      "transaction_date"
+    ],
+    "transition_scenarios": [
+      {
+        "action_id": "assign",
+        "source_state": "opened",
+        "target_state": "in_progress",
+        "disallowed_state": "archived"
+      },
+      {
+        "action_id": "archive",
+        "source_state": "opened",
+        "target_state": "archived",
+        "disallowed_state": "archived"
+      }
+    ],
+    "related_docs": [
+      "vendor_portal_account",
+      "partner_issue_case",
+      "purchase_order",
+      "external_fulfillment_order"
+    ],
+    "downstream_effects": [],
+    "action_side_effects_file": "side_effects.json"
+  },
   "runtime": {
     "source_of_truth": "doc_folder",
     "generated_from": [
@@ -776,7 +1013,8 @@
       "schema.json",
       "actions.json",
       "settings.json",
-      "logic_seed.json"
+      "logic_seed.json",
+      "side_effects.json"
     ],
     "generator": "plug.apps.doc.file_handler"
   }

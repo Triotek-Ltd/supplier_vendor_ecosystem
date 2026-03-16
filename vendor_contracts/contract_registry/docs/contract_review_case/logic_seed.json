@@ -63,7 +63,10 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "owner": "actor_reference"
+      "owner": "actor_reference",
+      "related_vendor_agreement": "relation_collection",
+      "related_service_level_record": "relation_collection",
+      "related_partner_issue_case": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -102,7 +105,48 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "vendor_agreement",
+        "service_level_record",
+        "partner_issue_case"
+      ],
+      "borrowed_fields": [
+        "agreement terms",
+        "dates from vendor_agreement"
+      ],
+      "inferred_roles": [
+        "compliance officer",
+        "procurement officer",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "compliance officer",
+      "procurement officer",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "compliance officer"
+      ],
+      "assign": [
+        "compliance officer"
+      ],
+      "review": [
+        "procurement officer"
+      ],
+      "close": [
+        "case owner"
+      ],
+      "archive": [
+        "case owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "vendor_agreement",
     "service_level_record",

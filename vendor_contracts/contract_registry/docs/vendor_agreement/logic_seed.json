@@ -65,7 +65,10 @@
       "transaction_date": "transaction_date",
       "party": "primary_party",
       "currency": "currency_code",
-      "total_amount": "total_amount"
+      "total_amount": "total_amount",
+      "related_service_level_record": "relation_collection",
+      "related_contract_review_case": "relation_collection",
+      "related_vendor_contract": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -104,7 +107,48 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "service_level_record",
+        "contract_review_case",
+        "vendor_contract"
+      ],
+      "borrowed_fields": [
+        "supplier identity",
+        "capability context from supplier_capability_profile"
+      ],
+      "inferred_roles": [
+        "compliance officer",
+        "procurement officer",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "compliance officer",
+      "procurement officer",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "compliance officer"
+      ],
+      "review": [
+        "procurement officer"
+      ],
+      "approve": [
+        "compliance officer"
+      ],
+      "activate": [
+        "case owner"
+      ],
+      "archive": [
+        "case owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "service_level_record",
     "contract_review_case",

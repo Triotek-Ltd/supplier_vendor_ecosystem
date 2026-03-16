@@ -5,9 +5,11 @@ from __future__ import annotations
 
 ARCHETYPE_PROFILE = {'workflow_profile': {'mode': 'transaction_flow', 'supports_submission': True}, 'reporting_profile': {'supports_snapshots': True, 'supports_outputs': True}, 'integration_profile': {'external_sync_enabled': True, 'tracks_external_refs': True}, 'lifecycle_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled', 'archived'], 'is_transactional': True}
 
-CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state', 'transaction_date'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'transaction_date': 'transaction_date', 'party': 'primary_party', 'currency': 'currency_code', 'total_amount': 'total_amount', 'due_date': 'schedule_marker'}, 'search_fields': ['title', 'reference_no', 'description', 'request_code', 'vendor_reference', 'request_type'], 'list_columns': ['title', 'reference_no', 'transaction_date', 'party', 'total_amount', 'workflow_state'], 'initial_state': 'opened', 'lifecycle_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'assign': 'in_progress', 'accept': None, 'complete': None, 'cancel': None, 'archive': 'archived'}}
+CONTRACT = {'title_field': 'title', 'status_field': 'workflow_state', 'reference_field': 'reference_no', 'required_fields': ['title', 'workflow_state', 'transaction_date'], 'field_purposes': {'workflow_state': 'lifecycle_state', 'transaction_date': 'transaction_date', 'party': 'primary_party', 'currency': 'currency_code', 'total_amount': 'total_amount', 'due_date': 'schedule_marker', 'related_vendor_portal_account': 'relation_collection', 'related_partner_issue_case': 'relation_collection', 'related_purchase_order': 'relation_collection', 'related_external_fulfillment_order': 'relation_collection'}, 'search_fields': ['title', 'reference_no', 'description', 'request_code', 'vendor_reference', 'request_type'], 'list_columns': ['title', 'reference_no', 'transaction_date', 'party', 'total_amount', 'workflow_state'], 'initial_state': 'opened', 'lifecycle_states': ['opened', 'assigned', 'in_progress', 'completed', 'cancelled', 'archived'], 'terminal_states': ['archived'], 'action_targets': {'create': None, 'assign': 'in_progress', 'accept': None, 'complete': None, 'cancel': None, 'archive': 'archived'}}
 
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['vendor_portal_account', 'partner_issue_case', 'purchase_order', 'external_fulfillment_order'], 'borrowed_fields': ['vendor/account context from vendor_portal_account', 'business refs from operations/logistics docs'], 'inferred_roles': ['procurement officer', 'account owner', 'operations coordinator', 'case owner']}, 'actors': ['procurement officer', 'account owner', 'operations coordinator', 'case owner'], 'action_actors': {'create': ['procurement officer'], 'assign': ['procurement officer'], 'cancel': ['account owner'], 'archive': ['account owner']}}
+
+SIDE_EFFECT_HINTS = {'downstream_effects': [], 'related_docs': ['vendor_portal_account', 'partner_issue_case', 'purchase_order', 'external_fulfillment_order'], 'action_targets': {'create': None, 'assign': 'in_progress', 'accept': None, 'complete': None, 'cancel': None, 'archive': 'archived'}, 'action_side_effects_file': 'side_effects.json'}
 
 class DomainService:
     doc_id = "collaboration_request"
@@ -63,12 +65,28 @@ class DomainService:
     def after_update(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         return serialized_data
 
+    def after_action(
+        self,
+        instance,
+        action_id: str,
+        payload: dict,
+        action_result: dict,
+        context: dict | None = None,
+    ) -> dict:
+        return {
+            "updates": {},
+            "side_effects": [],
+        }
+
     def shape_retrieve_data(self, instance, serialized_data: dict, context: dict | None = None) -> dict:
         serialized_data.setdefault("_business_capabilities", self.business_capabilities())
         return serialized_data
 
     def workflow_objective(self) -> str | None:
         return WORKFLOW_HINTS.get("business_objective")
+
+    def side_effect_hints(self) -> dict:
+        return SIDE_EFFECT_HINTS
 
     def business_capabilities(self) -> dict:
         return {

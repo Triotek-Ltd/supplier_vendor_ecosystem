@@ -35,7 +35,32 @@
       "show_in_related_panel": true
     }
   ],
-  "lookup_rules": [],
+  "lookup_rules": [
+    {
+      "field_id": "related_vendor_portal_account",
+      "doc_id": "vendor_portal_account",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_partner_issue_case",
+      "doc_id": "partner_issue_case",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_purchase_order",
+      "doc_id": "purchase_order",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    },
+    {
+      "field_id": "related_external_fulfillment_order",
+      "doc_id": "external_fulfillment_order",
+      "lookup_mode": "multiple",
+      "purpose": "relation_collection"
+    }
+  ],
   "fetch_rules": [],
   "reference_map": {
     "primary_reference_field": "reference_no",
@@ -43,7 +68,12 @@
   },
   "relation_rules": {
     "parent_doc": null,
-    "child_docs": [],
+    "child_docs": [
+      "vendor_portal_account",
+      "partner_issue_case",
+      "purchase_order",
+      "external_fulfillment_order"
+    ],
     "show_related_panel": true
   },
   "borrowed_fields": [
@@ -67,6 +97,47 @@
   "runtime_hints": {
     "doc_key": "collaboration_request",
     "supports_related_lookup": true,
-    "supports_fetch_rules": true
+    "supports_fetch_rules": true,
+    "workflow_hints": {
+      "relation_context": {
+        "related_docs": [
+          "vendor_portal_account",
+          "partner_issue_case",
+          "purchase_order",
+          "external_fulfillment_order"
+        ],
+        "borrowed_fields": [
+          "vendor/account context from vendor_portal_account",
+          "business refs from operations/logistics docs"
+        ],
+        "inferred_roles": [
+          "procurement officer",
+          "account owner",
+          "operations coordinator",
+          "case owner"
+        ]
+      },
+      "actors": [
+        "procurement officer",
+        "account owner",
+        "operations coordinator",
+        "case owner"
+      ],
+      "action_actors": {
+        "create": [
+          "procurement officer"
+        ],
+        "assign": [
+          "procurement officer"
+        ],
+        "cancel": [
+          "account owner"
+        ],
+        "archive": [
+          "account owner"
+        ]
+      }
+    },
+    "action_side_effects_file": "side_effects.json"
   }
 }

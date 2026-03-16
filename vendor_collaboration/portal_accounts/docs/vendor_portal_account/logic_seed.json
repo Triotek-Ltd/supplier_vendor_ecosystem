@@ -57,7 +57,10 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "account_status": "status_flag"
+      "account_status": "status_flag",
+      "related_collaboration_request": "relation_collection",
+      "related_partner_issue_case": "relation_collection",
+      "related_supplier_capability_profile": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -92,7 +95,39 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "collaboration_request",
+        "partner_issue_case",
+        "supplier_capability_profile"
+      ],
+      "borrowed_fields": [
+        "vendor identity from linked partner/profile records"
+      ],
+      "inferred_roles": [
+        "procurement officer",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "procurement officer",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "procurement officer"
+      ],
+      "activate": [
+        "case owner"
+      ],
+      "archive": [
+        "case owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "collaboration_request",
     "partner_issue_case",

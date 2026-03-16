@@ -11,7 +11,7 @@ TERMINAL_STATES = ['archived']
 ACTION_RULES = {'record': {'allowed_in_states': ['active', 'reviewed'], 'transitions_to': None}, 'review': {'allowed_in_states': ['active', 'reviewed'], 'transitions_to': 'reviewed'}, 'archive': {'allowed_in_states': ['active', 'reviewed'], 'transitions_to': 'archived'}}
 
 STATE_FIELD = 'workflow_state'
-WORKFLOW_HINTS = {}
+WORKFLOW_HINTS = {'relation_context': {'related_docs': ['vendor_agreement', 'contract_review_case', 'vendor_review'], 'borrowed_fields': ['SLA targets', 'vendor identity from vendor_agreement'], 'inferred_roles': ['compliance officer', 'procurement officer', 'case owner']}, 'actors': ['compliance officer', 'procurement officer', 'case owner'], 'action_actors': {'record': ['compliance officer'], 'review': ['procurement officer'], 'archive': ['case owner']}}
 
 class WorkflowService:
     def allowed_actions_for_state(self, state: str | None) -> list[str]:

@@ -65,7 +65,11 @@
     ],
     "field_purposes": {
       "workflow_state": "lifecycle_state",
-      "owner": "actor_reference"
+      "owner": "actor_reference",
+      "related_vendor_portal_account": "relation_collection",
+      "related_collaboration_request": "relation_collection",
+      "related_contract_review_case": "relation_collection",
+      "related_delivery_exception_case": "relation_collection"
     },
     "search_fields": [
       "title",
@@ -105,7 +109,48 @@
       "archive": "archived"
     }
   },
-  "workflow_hints": {},
+  "workflow_hints": {
+    "relation_context": {
+      "related_docs": [
+        "vendor_portal_account",
+        "collaboration_request",
+        "contract_review_case",
+        "delivery_exception_case"
+      ],
+      "borrowed_fields": [
+        "vendor",
+        "contract context from linked records"
+      ],
+      "inferred_roles": [
+        "compliance officer",
+        "procurement officer",
+        "operations coordinator",
+        "case owner"
+      ]
+    },
+    "actors": [
+      "compliance officer",
+      "procurement officer",
+      "operations coordinator",
+      "case owner"
+    ],
+    "action_actors": {
+      "create": [
+        "compliance officer"
+      ],
+      "assign": [
+        "compliance officer"
+      ],
+      "close": [
+        "case owner"
+      ],
+      "archive": [
+        "case owner"
+      ]
+    }
+  },
+  "downstream_effects": [],
+  "action_side_effects_file": "side_effects.json",
   "related_docs": [
     "vendor_portal_account",
     "collaboration_request",
