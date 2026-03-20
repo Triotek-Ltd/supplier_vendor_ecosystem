@@ -6,7 +6,7 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "contract_review_case"
-RELATED_DOCS = [{'doc_id': 'vendor_agreement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'service_level_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'partner_issue_case', 'relation_type': 'related', 'show_in_related_panel': True}]
+RELATED_DOCS = [{'doc_id': 'vendor_agreement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'service_level_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'partner_issue_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'employee_record', 'relation_type': 'related', 'show_in_related_panel': True}]
 FETCH_RULES = []
 
 BORROWED_FIELDS = [{'description': 'agreement terms'}, {'description': 'dates from vendor_agreement'}]

@@ -9,7 +9,107 @@
       "modified"
     ],
     "default_filters": [],
-    "quick_entry": false
+    "quick_entry": false,
+    "form_layout": {
+      "version": 1,
+      "tabs": [
+        {
+          "id": "overview",
+          "label": "Overview",
+          "sections": [
+            {
+              "id": "identity",
+              "label": "Identity",
+              "columns": [
+                {
+                  "id": "identity_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "title"
+                  ]
+                },
+                {
+                  "id": "identity_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "reference_no"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "status",
+              "label": "Workflow",
+              "columns": [
+                {
+                  "id": "status_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "workflow_state"
+                  ]
+                },
+                {
+                  "id": "status_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "active_status"
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "id": "details",
+          "label": "Details",
+          "sections": [
+            {
+              "id": "content",
+              "label": "Details",
+              "columns": [
+                {
+                  "id": "content_column_1",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "profile_code",
+                    "capability_categories",
+                    "operating_regions"
+                  ]
+                },
+                {
+                  "id": "content_column_2",
+                  "label": "",
+                  "width": 6,
+                  "fieldIds": [
+                    "supplier_identity",
+                    "service_product_scope"
+                  ]
+                }
+              ]
+            },
+            {
+              "id": "content_details",
+              "label": "Description",
+              "columns": [
+                {
+                  "id": "content_details_column_1",
+                  "label": "",
+                  "width": 12,
+                  "fieldIds": [
+                    "description"
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
   },
   "related_docs": [
     {
@@ -57,9 +157,36 @@
       "doc_id": "supplier_profile",
       "lookup_mode": "multiple",
       "purpose": "relation_collection"
+    },
+    {
+      "field_id": "supplier_identity",
+      "doc_id": "supplier_profile",
+      "lookup_mode": "single",
+      "purpose": "master_reference"
     }
   ],
-  "fetch_rules": [],
+  "fetch_rules": [
+    {
+      "source_field": "related_supplier_onboarding_case",
+      "doc_id": "supplier_onboarding_case",
+      "mode": "context"
+    },
+    {
+      "source_field": "related_supplier_compliance_record",
+      "doc_id": "supplier_compliance_record",
+      "mode": "context"
+    },
+    {
+      "source_field": "related_supplier_profile",
+      "doc_id": "supplier_profile",
+      "mode": "context"
+    },
+    {
+      "source_field": "supplier_identity",
+      "doc_id": "supplier_profile",
+      "mode": "context"
+    }
+  ],
   "reference_map": {
     "primary_reference_field": "reference_no",
     "reference_labels": []
@@ -67,23 +194,47 @@
   "relation_rules": {
     "parent_doc": null,
     "child_docs": [
+      "supplier_profile",
       "supplier_onboarding_case",
       "supplier_compliance_record",
-      "vendor_agreement",
-      "supplier_profile"
+      "vendor_agreement"
     ],
     "show_related_panel": true
   },
   "borrowed_fields": [
     {
       "description": "supplier master context from operations supplier docs where unified"
+    },
+    {
+      "field_id": "related_supplier_onboarding_case",
+      "doc_id": "supplier_onboarding_case",
+      "description": "Borrow context from supplier_onboarding_case through related_supplier_onboarding_case."
+    },
+    {
+      "field_id": "related_supplier_compliance_record",
+      "doc_id": "supplier_compliance_record",
+      "description": "Borrow context from supplier_compliance_record through related_supplier_compliance_record."
+    },
+    {
+      "field_id": "related_supplier_profile",
+      "doc_id": "supplier_profile",
+      "description": "Borrow context from supplier_profile through related_supplier_profile."
+    },
+    {
+      "field_id": "supplier_identity",
+      "doc_id": "supplier_profile",
+      "description": "Borrow context from supplier_profile through supplier_identity."
     }
   ],
   "ui_panels": {
     "show_activity_log": true,
     "show_comments": true,
     "show_assignments": true,
-    "show_related_docs": true
+    "show_related_docs": true,
+    "show_kpis": true,
+    "show_summaries": true,
+    "show_charts": true,
+    "show_reports": true
   },
   "integration": {
     "external_refs": [],
@@ -130,6 +281,20 @@
         ]
       }
     },
-    "action_side_effects_file": "side_effects.json"
+    "action_side_effects_file": "side_effects.json",
+    "supports_official_copy": true,
+    "supports_evidence_timeline": true,
+    "supports_chain_of_custody": false
+  },
+  "dashboard": {
+    "metric_blocks": [
+      "kpis",
+      "summaries",
+      "charts",
+      "reports",
+      "records"
+    ],
+    "default_view": "list",
+    "reporting_surface": "doc"
   }
 }

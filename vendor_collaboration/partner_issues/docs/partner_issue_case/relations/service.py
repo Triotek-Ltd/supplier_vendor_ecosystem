@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "partner_issue_case"
-RELATED_DOCS = [{'doc_id': 'vendor_portal_account', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'collaboration_request', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'contract_review_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'delivery_exception_case', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'vendor_portal_account', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'collaboration_request', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'contract_review_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'delivery_exception_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'employee_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'related_delivery_exception_case', 'doc_id': 'delivery_exception_case', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'vendor'}, {'description': 'contract context from linked records'}]
+BORROWED_FIELDS = [{'description': 'vendor'}, {'description': 'contract context from linked records'}, {'field_id': 'related_delivery_exception_case', 'doc_id': 'delivery_exception_case', 'description': 'Borrow context from delivery_exception_case through related_delivery_exception_case.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

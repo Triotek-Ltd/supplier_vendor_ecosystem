@@ -6,10 +6,10 @@ from core.services.relation_resolution import RelationResolutionService
 
 
 DOC_ID = "supplier_compliance_record"
-RELATED_DOCS = [{'doc_id': 'supplier_onboarding_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'supplier_capability_profile', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'vendor_review', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+RELATED_DOCS = [{'doc_id': 'supplier_onboarding_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'supplier_capability_profile', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'vendor_review', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'party_record', 'relation_type': 'related', 'show_in_related_panel': True}]
+FETCH_RULES = [{'source_field': 'party', 'doc_id': 'party_record', 'mode': 'context'}, {'source_field': 'related_supplier_onboarding_case', 'doc_id': 'supplier_onboarding_case', 'mode': 'context'}, {'source_field': 'related_supplier_capability_profile', 'doc_id': 'supplier_capability_profile', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'supplier identity'}, {'description': 'capabilities from linked records'}]
+BORROWED_FIELDS = [{'description': 'supplier identity'}, {'description': 'capabilities from linked records'}, {'field_id': 'party', 'doc_id': 'party_record', 'description': 'Borrow context from party_record through party.'}, {'field_id': 'related_supplier_onboarding_case', 'doc_id': 'supplier_onboarding_case', 'description': 'Borrow context from supplier_onboarding_case through related_supplier_onboarding_case.'}, {'field_id': 'related_supplier_capability_profile', 'doc_id': 'supplier_capability_profile', 'description': 'Borrow context from supplier_capability_profile through related_supplier_capability_profile.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

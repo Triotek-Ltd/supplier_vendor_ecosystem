@@ -4,5 +4,612 @@
   "app_id": "supplier_vendor_ecosystem",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Vendor Contracts KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_contracts",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Vendor Contracts summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_contracts",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Vendor Contracts charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_contracts",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "vendor_contracts_trend_line",
+            "label": "Vendor Contracts trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "vendor_contracts_volume_column",
+            "label": "Vendor Contracts volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "vendor_contracts_distribution_donut",
+            "label": "Vendor Contracts distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "contract_review_case_trend_line",
+            "label": "Contract Review Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "contract_review_case_volume_column",
+            "label": "Contract Review Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "contract_review_case_distribution_donut",
+            "label": "Contract Review Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "vendor_agreement_trend_line",
+            "label": "Vendor Agreement trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "vendor_agreement_volume_column",
+            "label": "Vendor Agreement volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "vendor_agreement_distribution_donut",
+            "label": "Vendor Agreement distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "service_level_record_trend_line",
+            "label": "Service Level Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "service_level_record_volume_column",
+            "label": "Service Level Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "service_level_record_distribution_donut",
+            "label": "Service Level Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Vendor Contracts reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_contracts",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_contracts",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_contracts",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_contracts",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_contracts",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Vendor Contracts Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Vendor Contracts Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Contract Review Case Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Contract Review Case Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "vendor_contracts_trend_line",
+        "label": "Vendor Contracts trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "vendor_contracts_volume_column",
+        "label": "Vendor Contracts volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "vendor_contracts_distribution_donut",
+        "label": "Vendor Contracts distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "contract_review_case_trend_line",
+        "label": "Contract Review Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "contract_review_case_volume_column",
+        "label": "Contract Review Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "contract_review_case_distribution_donut",
+        "label": "Contract Review Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "vendor_agreement_trend_line",
+        "label": "Vendor Agreement trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "vendor_agreement_volume_column",
+        "label": "Vendor Agreement volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "vendor_agreement_distribution_donut",
+        "label": "Vendor Agreement distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "service_level_record_trend_line",
+        "label": "Service Level Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "service_level_record_volume_column",
+        "label": "Service Level Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "service_level_record_distribution_donut",
+        "label": "Service Level Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "contract_review_case",
+        "title": "Contract Review Case",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "vendor_agreement",
+        "title": "Vendor Agreement",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "service_level_record",
+        "title": "Service Level Record",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "vendor_agreement",
+      "service_level_record",
+      "partner_issue_case",
+      "contract_review_case",
+      "vendor_contract",
+      "vendor_review"
+    ],
+    "upstream_docs": [
+      "vendor_agreement",
+      "service_level_record",
+      "partner_issue_case",
+      "contract_review_case",
+      "vendor_contract",
+      "vendor_review"
+    ],
+    "downstream_docs": [
+      "partner_issue_case",
+      "contract_review_case",
+      "service_level_record"
+    ],
+    "actors": [
+      "compliance officer",
+      "procurement officer",
+      "case owner"
+    ],
+    "downstream_effects": [],
+    "emits_records": [
+      {
+        "action_id": "close",
+        "target_doc": "partner_issue_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "partner_issue_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "approve",
+        "target_doc": "contract_review_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "activate",
+        "target_doc": "service_level_record",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "vendor_agreement",
+      "service_level_record",
+      "partner_issue_case",
+      "contract_review_case",
+      "vendor_contract",
+      "vendor_review"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "contract_review_case",
+        "target_doc": "vendor_agreement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "contract_review_case",
+        "target_doc": "service_level_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "contract_review_case",
+        "target_doc": "partner_issue_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "contract_review_case",
+        "target_doc": "partner_issue_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "contract_review_case",
+        "target_doc": "partner_issue_case",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "vendor_agreement",
+        "target_doc": "service_level_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "vendor_agreement",
+        "target_doc": "contract_review_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "vendor_agreement",
+        "target_doc": "vendor_contract",
+        "relation": "references"
+      },
+      {
+        "source_doc": "vendor_agreement",
+        "target_doc": "contract_review_case",
+        "relation": "create_record",
+        "action_id": "approve"
+      },
+      {
+        "source_doc": "vendor_agreement",
+        "target_doc": "service_level_record",
+        "relation": "create_record",
+        "action_id": "activate"
+      },
+      {
+        "source_doc": "service_level_record",
+        "target_doc": "vendor_agreement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_level_record",
+        "target_doc": "contract_review_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "service_level_record",
+        "target_doc": "vendor_review",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "vendor_agreement",
+          "kind": "doc"
+        },
+        {
+          "id": "service_level_record",
+          "kind": "doc"
+        },
+        {
+          "id": "partner_issue_case",
+          "kind": "doc"
+        },
+        {
+          "id": "contract_review_case",
+          "kind": "doc"
+        },
+        {
+          "id": "vendor_contract",
+          "kind": "doc"
+        },
+        {
+          "id": "vendor_review",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "contract_review_case",
+          "target_doc": "vendor_agreement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "contract_review_case",
+          "target_doc": "service_level_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "contract_review_case",
+          "target_doc": "partner_issue_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "contract_review_case",
+          "target_doc": "partner_issue_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "contract_review_case",
+          "target_doc": "partner_issue_case",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "vendor_agreement",
+          "target_doc": "service_level_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "vendor_agreement",
+          "target_doc": "contract_review_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "vendor_agreement",
+          "target_doc": "vendor_contract",
+          "relation": "references"
+        },
+        {
+          "source_doc": "vendor_agreement",
+          "target_doc": "contract_review_case",
+          "relation": "create_record",
+          "action_id": "approve"
+        },
+        {
+          "source_doc": "vendor_agreement",
+          "target_doc": "service_level_record",
+          "relation": "create_record",
+          "action_id": "activate"
+        },
+        {
+          "source_doc": "service_level_record",
+          "target_doc": "vendor_agreement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_level_record",
+          "target_doc": "contract_review_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "service_level_record",
+          "target_doc": "vendor_review",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

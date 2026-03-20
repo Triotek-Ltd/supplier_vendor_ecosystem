@@ -4,5 +4,569 @@
   "app_id": "supplier_vendor_ecosystem",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Supplier Programs KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "supplier_programs",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Supplier Programs summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "supplier_programs",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Supplier Programs charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "supplier_programs",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "supplier_programs_trend_line",
+            "label": "Supplier Programs trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "supplier_programs_volume_column",
+            "label": "Supplier Programs volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "supplier_programs_distribution_donut",
+            "label": "Supplier Programs distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "supplier_compliance_record_trend_line",
+            "label": "Supplier Compliance Record trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "supplier_compliance_record_volume_column",
+            "label": "Supplier Compliance Record volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "supplier_compliance_record_distribution_donut",
+            "label": "Supplier Compliance Record distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "supplier_capability_profile_trend_line",
+            "label": "Supplier Capability Profile trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "supplier_capability_profile_volume_column",
+            "label": "Supplier Capability Profile volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "supplier_capability_profile_distribution_donut",
+            "label": "Supplier Capability Profile distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "supplier_onboarding_case_trend_line",
+            "label": "Supplier Onboarding Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "supplier_onboarding_case_volume_column",
+            "label": "Supplier Onboarding Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "supplier_onboarding_case_distribution_donut",
+            "label": "Supplier Onboarding Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Supplier Programs reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "supplier_programs",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "supplier_programs",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "supplier_programs",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "supplier_programs",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "supplier_programs",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Supplier Programs Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Supplier Programs Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Supplier Compliance Record Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Supplier Compliance Record Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "supplier_programs_trend_line",
+        "label": "Supplier Programs trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "supplier_programs_volume_column",
+        "label": "Supplier Programs volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "supplier_programs_distribution_donut",
+        "label": "Supplier Programs distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "supplier_compliance_record_trend_line",
+        "label": "Supplier Compliance Record trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "supplier_compliance_record_volume_column",
+        "label": "Supplier Compliance Record volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "supplier_compliance_record_distribution_donut",
+        "label": "Supplier Compliance Record distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "supplier_capability_profile_trend_line",
+        "label": "Supplier Capability Profile trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "supplier_capability_profile_volume_column",
+        "label": "Supplier Capability Profile volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "supplier_capability_profile_distribution_donut",
+        "label": "Supplier Capability Profile distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "supplier_onboarding_case_trend_line",
+        "label": "Supplier Onboarding Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "supplier_onboarding_case_volume_column",
+        "label": "Supplier Onboarding Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "supplier_onboarding_case_distribution_donut",
+        "label": "Supplier Onboarding Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "supplier_compliance_record",
+        "title": "Supplier Compliance Record",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "supplier_capability_profile",
+        "title": "Supplier Capability Profile",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "supplier_onboarding_case",
+        "title": "Supplier Onboarding Case",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "supplier_onboarding_case",
+      "supplier_capability_profile",
+      "vendor_review",
+      "supplier_compliance_record",
+      "vendor_agreement",
+      "supplier_profile"
+    ],
+    "upstream_docs": [
+      "supplier_onboarding_case",
+      "supplier_capability_profile",
+      "vendor_review",
+      "supplier_compliance_record",
+      "vendor_agreement",
+      "supplier_profile"
+    ],
+    "downstream_docs": [
+      "supplier_compliance_record"
+    ],
+    "actors": [
+      "compliance officer",
+      "procurement officer",
+      "case owner"
+    ],
+    "downstream_effects": [],
+    "emits_records": [
+      {
+        "action_id": "approve",
+        "target_doc": "supplier_compliance_record",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "supplier_onboarding_case",
+      "supplier_capability_profile",
+      "vendor_review",
+      "supplier_compliance_record",
+      "vendor_agreement",
+      "supplier_profile"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "supplier_compliance_record",
+        "target_doc": "supplier_onboarding_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_compliance_record",
+        "target_doc": "supplier_capability_profile",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_compliance_record",
+        "target_doc": "vendor_review",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_capability_profile",
+        "target_doc": "supplier_onboarding_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_capability_profile",
+        "target_doc": "supplier_compliance_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_capability_profile",
+        "target_doc": "vendor_agreement",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_capability_profile",
+        "target_doc": "supplier_profile",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_onboarding_case",
+        "target_doc": "supplier_capability_profile",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_onboarding_case",
+        "target_doc": "supplier_compliance_record",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_onboarding_case",
+        "target_doc": "supplier_profile",
+        "relation": "references"
+      },
+      {
+        "source_doc": "supplier_onboarding_case",
+        "target_doc": "supplier_compliance_record",
+        "relation": "create_record",
+        "action_id": "approve"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "supplier_onboarding_case",
+          "kind": "doc"
+        },
+        {
+          "id": "supplier_capability_profile",
+          "kind": "doc"
+        },
+        {
+          "id": "vendor_review",
+          "kind": "doc"
+        },
+        {
+          "id": "supplier_compliance_record",
+          "kind": "doc"
+        },
+        {
+          "id": "vendor_agreement",
+          "kind": "doc"
+        },
+        {
+          "id": "supplier_profile",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "supplier_compliance_record",
+          "target_doc": "supplier_onboarding_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_compliance_record",
+          "target_doc": "supplier_capability_profile",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_compliance_record",
+          "target_doc": "vendor_review",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_capability_profile",
+          "target_doc": "supplier_onboarding_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_capability_profile",
+          "target_doc": "supplier_compliance_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_capability_profile",
+          "target_doc": "vendor_agreement",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_capability_profile",
+          "target_doc": "supplier_profile",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_onboarding_case",
+          "target_doc": "supplier_capability_profile",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_onboarding_case",
+          "target_doc": "supplier_compliance_record",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_onboarding_case",
+          "target_doc": "supplier_profile",
+          "relation": "references"
+        },
+        {
+          "source_doc": "supplier_onboarding_case",
+          "target_doc": "supplier_compliance_record",
+          "relation": "create_record",
+          "action_id": "approve"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

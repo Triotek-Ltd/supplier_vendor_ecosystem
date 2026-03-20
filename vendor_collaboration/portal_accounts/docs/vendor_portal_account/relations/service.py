@@ -7,9 +7,9 @@ from core.services.relation_resolution import RelationResolutionService
 
 DOC_ID = "vendor_portal_account"
 RELATED_DOCS = [{'doc_id': 'collaboration_request', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'partner_issue_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'supplier_capability_profile', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+FETCH_RULES = [{'source_field': 'related_supplier_capability_profile', 'doc_id': 'supplier_capability_profile', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'vendor identity from linked partner/profile records'}]
+BORROWED_FIELDS = [{'description': 'vendor identity from linked partner/profile records'}, {'field_id': 'related_supplier_capability_profile', 'doc_id': 'supplier_capability_profile', 'description': 'Borrow context from supplier_capability_profile through related_supplier_capability_profile.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:

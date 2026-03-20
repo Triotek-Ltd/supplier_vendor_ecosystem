@@ -2,17 +2,21 @@
 
 from __future__ import annotations
 
+from typing import Any, cast
+
 
 DOC_ID = "supplier_onboarding_case"
 ACTION_ID = "reject"
-ACTION_RULE = {'allowed_in_states': ['opened', 'in_review', 'approved', 'rejected'], 'transitions_to': 'rejected'}
+ACTION_RULE: dict[str, Any] = {'allowed_in_states': ['opened', 'in_review', 'approved', 'rejected'], 'transitions_to': 'rejected'}
 
 STATE_FIELD = 'workflow_state'
 WORKFLOW_HINTS = {'relation_context': {'related_docs': ['supplier_capability_profile', 'supplier_compliance_record', 'supplier_profile'], 'borrowed_fields': ['supplier identity from ecosystem or operations supplier records where linked'], 'inferred_roles': ['compliance officer', 'procurement officer', 'case owner']}, 'actors': ['compliance officer', 'procurement officer', 'case owner'], 'action_actors': {'create': ['compliance officer'], 'assign': ['compliance officer'], 'review': ['procurement officer'], 'approve': ['compliance officer'], 'reject': ['compliance officer'], 'close': ['case owner'], 'archive': ['case owner']}}
 
+ACTION_CONTRACT: dict[str, Any] = {'rule': {'allowed_in_states': ['opened', 'in_review', 'approved', 'rejected'], 'transitions_to': 'rejected'}, 'requires_action_comment': False, 'requires_reason_for_change': False, 'requires_evidence': False, 'is_disposition_action': False, 'creates_submission_snapshot': False, 'creates_official_copy': False, 'requires_signature': False}
+
 def handle_reject(payload: dict, context: dict | None = None) -> dict:
     context = context or {}
-    next_state = ACTION_RULE.get("transitions_to")
+    next_state = cast(str | None, ACTION_RULE.get("transitions_to"))
     updates = {STATE_FIELD: next_state} if STATE_FIELD and next_state else {}
     return {
         "doc_id": DOC_ID,
@@ -22,5 +26,6 @@ def handle_reject(payload: dict, context: dict | None = None) -> dict:
         "allowed_in_states": ACTION_RULE.get("allowed_in_states", []),
         "next_state": next_state,
         "updates": updates,
+        "action_contract": ACTION_CONTRACT,
         "workflow_objective": WORKFLOW_HINTS.get("business_objective"),
     }

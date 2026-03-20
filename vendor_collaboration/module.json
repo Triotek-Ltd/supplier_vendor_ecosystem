@@ -4,5 +4,647 @@
   "app_id": "supplier_vendor_ecosystem",
   "type": "module",
   "status": "draft",
-  "supports_submodules": true
+  "supports_submodules": true,
+  "ui": {
+    "icon_key": "apps",
+    "accent": "#246f89",
+    "logo_image": null,
+    "cover_image": null
+  },
+  "dashboard": {
+    "version": 1,
+    "surface": "module",
+    "hero": {
+      "variant": "summary_strip",
+      "show_breadcrumb": true,
+      "show_title": true
+    },
+    "navigation": {
+      "primary_children": "docs",
+      "flatten_submodules_in_ui": true
+    },
+    "blocks": [
+      {
+        "id": "kpis",
+        "type": "kpi_cards",
+        "title": "Vendor Collaboration KPIs",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_collaboration",
+          "metric_family": "overview"
+        }
+      },
+      {
+        "id": "summaries",
+        "type": "summary_cards",
+        "title": "Vendor Collaboration summaries",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_collaboration",
+          "metric_family": "summary"
+        }
+      },
+      {
+        "id": "charts",
+        "type": "chart_group",
+        "title": "Vendor Collaboration charts",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_collaboration",
+          "metric_family": "trend"
+        },
+        "chart_specs": [
+          {
+            "id": "vendor_collaboration_trend_line",
+            "label": "Vendor Collaboration trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "vendor_collaboration_volume_column",
+            "label": "Vendor Collaboration volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "vendor_collaboration_distribution_donut",
+            "label": "Vendor Collaboration distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "partner_issue_case_trend_line",
+            "label": "Partner Issue Case trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "partner_issue_case_volume_column",
+            "label": "Partner Issue Case volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "partner_issue_case_distribution_donut",
+            "label": "Partner Issue Case distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "collaboration_request_trend_line",
+            "label": "Collaboration Request trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "collaboration_request_volume_column",
+            "label": "Collaboration Request volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "collaboration_request_distribution_donut",
+            "label": "Collaboration Request distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          },
+          {
+            "id": "vendor_portal_account_trend_line",
+            "label": "Vendor Portal Account trend",
+            "chart_type": "line",
+            "series_role": "time_series",
+            "metric_family": "trend",
+            "x_field": "period",
+            "y_field": "value"
+          },
+          {
+            "id": "vendor_portal_account_volume_column",
+            "label": "Vendor Portal Account volume",
+            "chart_type": "column",
+            "series_role": "comparison",
+            "metric_family": "summary",
+            "x_field": "category",
+            "y_field": "count"
+          },
+          {
+            "id": "vendor_portal_account_distribution_donut",
+            "label": "Vendor Portal Account distribution",
+            "chart_type": "donut",
+            "series_role": "distribution",
+            "metric_family": "summary",
+            "segment_field": "category",
+            "value_field": "value"
+          }
+        ]
+      },
+      {
+        "id": "reports",
+        "type": "report_links",
+        "title": "Vendor Collaboration reports",
+        "data_source": {
+          "kind": "db",
+          "entity_scope": "module",
+          "entity_id": "vendor_collaboration",
+          "metric_family": "reporting"
+        }
+      }
+    ]
+  },
+  "reporting": {
+    "supports_kpis": true,
+    "supports_summaries": true,
+    "supports_charts": true,
+    "supports_reports": true,
+    "default_time_grain": "month",
+    "default_comparison": "previous_period",
+    "default_currency_mode": "base_currency",
+    "metric_sources": [
+      {
+        "id": "overview",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_collaboration",
+        "metric_family": "overview"
+      },
+      {
+        "id": "summary",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_collaboration",
+        "metric_family": "summary"
+      },
+      {
+        "id": "trend",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_collaboration",
+        "metric_family": "trend"
+      },
+      {
+        "id": "reporting",
+        "kind": "db",
+        "entity_scope": "module",
+        "entity_id": "vendor_collaboration",
+        "metric_family": "reporting"
+      }
+    ],
+    "report_registry": [
+      {
+        "id": "overview_report",
+        "label": "Vendor Collaboration Overview",
+        "report_type": "dashboard_summary",
+        "surface": "module"
+      },
+      {
+        "id": "trend_report",
+        "label": "Vendor Collaboration Trends",
+        "report_type": "trend_analysis",
+        "surface": "module"
+      },
+      {
+        "id": "summary_report",
+        "label": "Partner Issue Case Summary",
+        "report_type": "summary_report",
+        "surface": "doc"
+      },
+      {
+        "id": "detail_report",
+        "label": "Partner Issue Case Detail",
+        "report_type": "detail_report",
+        "surface": "doc"
+      }
+    ],
+    "chart_library": {
+      "renderer": "recharts",
+      "recommended_package": "recharts",
+      "source": "https://recharts.org/en-US"
+    },
+    "chart_registry": [
+      {
+        "id": "vendor_collaboration_trend_line",
+        "label": "Vendor Collaboration trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "vendor_collaboration_volume_column",
+        "label": "Vendor Collaboration volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "vendor_collaboration_distribution_donut",
+        "label": "Vendor Collaboration distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "partner_issue_case_trend_line",
+        "label": "Partner Issue Case trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "partner_issue_case_volume_column",
+        "label": "Partner Issue Case volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "partner_issue_case_distribution_donut",
+        "label": "Partner Issue Case distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "collaboration_request_trend_line",
+        "label": "Collaboration Request trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "collaboration_request_volume_column",
+        "label": "Collaboration Request volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "collaboration_request_distribution_donut",
+        "label": "Collaboration Request distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      },
+      {
+        "id": "vendor_portal_account_trend_line",
+        "label": "Vendor Portal Account trend",
+        "chart_type": "line",
+        "series_role": "time_series",
+        "metric_family": "trend",
+        "x_field": "period",
+        "y_field": "value"
+      },
+      {
+        "id": "vendor_portal_account_volume_column",
+        "label": "Vendor Portal Account volume",
+        "chart_type": "column",
+        "series_role": "comparison",
+        "metric_family": "summary",
+        "x_field": "category",
+        "y_field": "count"
+      },
+      {
+        "id": "vendor_portal_account_distribution_donut",
+        "label": "Vendor Portal Account distribution",
+        "chart_type": "donut",
+        "series_role": "distribution",
+        "metric_family": "summary",
+        "segment_field": "category",
+        "value_field": "value"
+      }
+    ],
+    "source_docs": [],
+    "source_fields": [],
+    "child_sources": [
+      {
+        "id": "partner_issue_case",
+        "title": "Partner Issue Case",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "collaboration_request",
+        "title": "Collaboration Request",
+        "surface": null,
+        "source_docs": []
+      },
+      {
+        "id": "vendor_portal_account",
+        "title": "Vendor Portal Account",
+        "surface": null,
+        "source_docs": []
+      }
+    ]
+  },
+  "flow": {
+    "related_docs": [
+      "vendor_portal_account",
+      "collaboration_request",
+      "contract_review_case",
+      "delivery_exception_case",
+      "partner_issue_case",
+      "purchase_order",
+      "external_fulfillment_order",
+      "supplier_capability_profile"
+    ],
+    "upstream_docs": [
+      "vendor_portal_account",
+      "collaboration_request",
+      "contract_review_case",
+      "delivery_exception_case",
+      "partner_issue_case",
+      "purchase_order",
+      "external_fulfillment_order",
+      "supplier_capability_profile"
+    ],
+    "downstream_docs": [
+      "contract_review_case",
+      "partner_issue_case"
+    ],
+    "actors": [
+      "compliance officer",
+      "procurement officer",
+      "operations coordinator",
+      "case owner",
+      "account owner"
+    ],
+    "downstream_effects": [],
+    "emits_records": [
+      {
+        "action_id": "resolve",
+        "target_doc": "contract_review_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "close",
+        "target_doc": "contract_review_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "contract_review_case",
+        "effect_type": "create_record"
+      },
+      {
+        "action_id": "assign",
+        "target_doc": "partner_issue_case",
+        "effect_type": "create_record"
+      }
+    ],
+    "handoff_targets": [
+      "vendor_portal_account",
+      "collaboration_request",
+      "contract_review_case",
+      "delivery_exception_case",
+      "partner_issue_case",
+      "purchase_order",
+      "external_fulfillment_order",
+      "supplier_capability_profile"
+    ],
+    "graph_edges": [
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "vendor_portal_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "collaboration_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "contract_review_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "delivery_exception_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "contract_review_case",
+        "relation": "create_record",
+        "action_id": "resolve"
+      },
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "contract_review_case",
+        "relation": "create_record",
+        "action_id": "close"
+      },
+      {
+        "source_doc": "partner_issue_case",
+        "target_doc": "contract_review_case",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "collaboration_request",
+        "target_doc": "vendor_portal_account",
+        "relation": "references"
+      },
+      {
+        "source_doc": "collaboration_request",
+        "target_doc": "partner_issue_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "collaboration_request",
+        "target_doc": "purchase_order",
+        "relation": "references"
+      },
+      {
+        "source_doc": "collaboration_request",
+        "target_doc": "external_fulfillment_order",
+        "relation": "references"
+      },
+      {
+        "source_doc": "collaboration_request",
+        "target_doc": "partner_issue_case",
+        "relation": "create_record",
+        "action_id": "assign"
+      },
+      {
+        "source_doc": "vendor_portal_account",
+        "target_doc": "collaboration_request",
+        "relation": "references"
+      },
+      {
+        "source_doc": "vendor_portal_account",
+        "target_doc": "partner_issue_case",
+        "relation": "references"
+      },
+      {
+        "source_doc": "vendor_portal_account",
+        "target_doc": "supplier_capability_profile",
+        "relation": "references"
+      }
+    ],
+    "operating_graph": {
+      "nodes": [
+        {
+          "id": "vendor_portal_account",
+          "kind": "doc"
+        },
+        {
+          "id": "collaboration_request",
+          "kind": "doc"
+        },
+        {
+          "id": "contract_review_case",
+          "kind": "doc"
+        },
+        {
+          "id": "delivery_exception_case",
+          "kind": "doc"
+        },
+        {
+          "id": "partner_issue_case",
+          "kind": "doc"
+        },
+        {
+          "id": "purchase_order",
+          "kind": "doc"
+        },
+        {
+          "id": "external_fulfillment_order",
+          "kind": "doc"
+        },
+        {
+          "id": "supplier_capability_profile",
+          "kind": "doc"
+        }
+      ],
+      "edges": [
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "vendor_portal_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "collaboration_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "contract_review_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "delivery_exception_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "contract_review_case",
+          "relation": "create_record",
+          "action_id": "resolve"
+        },
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "contract_review_case",
+          "relation": "create_record",
+          "action_id": "close"
+        },
+        {
+          "source_doc": "partner_issue_case",
+          "target_doc": "contract_review_case",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "collaboration_request",
+          "target_doc": "vendor_portal_account",
+          "relation": "references"
+        },
+        {
+          "source_doc": "collaboration_request",
+          "target_doc": "partner_issue_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "collaboration_request",
+          "target_doc": "purchase_order",
+          "relation": "references"
+        },
+        {
+          "source_doc": "collaboration_request",
+          "target_doc": "external_fulfillment_order",
+          "relation": "references"
+        },
+        {
+          "source_doc": "collaboration_request",
+          "target_doc": "partner_issue_case",
+          "relation": "create_record",
+          "action_id": "assign"
+        },
+        {
+          "source_doc": "vendor_portal_account",
+          "target_doc": "collaboration_request",
+          "relation": "references"
+        },
+        {
+          "source_doc": "vendor_portal_account",
+          "target_doc": "partner_issue_case",
+          "relation": "references"
+        },
+        {
+          "source_doc": "vendor_portal_account",
+          "target_doc": "supplier_capability_profile",
+          "relation": "references"
+        }
+      ]
+    }
+  },
+  "contract_version": 1
 }

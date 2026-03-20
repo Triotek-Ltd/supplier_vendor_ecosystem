@@ -7,9 +7,9 @@ from core.services.relation_resolution import RelationResolutionService
 
 DOC_ID = "supplier_capability_profile"
 RELATED_DOCS = [{'doc_id': 'supplier_onboarding_case', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'supplier_compliance_record', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'vendor_agreement', 'relation_type': 'related', 'show_in_related_panel': True}, {'doc_id': 'supplier_profile', 'relation_type': 'related', 'show_in_related_panel': True}]
-FETCH_RULES = []
+FETCH_RULES = [{'source_field': 'related_supplier_onboarding_case', 'doc_id': 'supplier_onboarding_case', 'mode': 'context'}, {'source_field': 'related_supplier_compliance_record', 'doc_id': 'supplier_compliance_record', 'mode': 'context'}, {'source_field': 'related_supplier_profile', 'doc_id': 'supplier_profile', 'mode': 'context'}]
 
-BORROWED_FIELDS = [{'description': 'supplier master context from operations supplier docs where unified'}]
+BORROWED_FIELDS = [{'description': 'supplier master context from operations supplier docs where unified'}, {'field_id': 'related_supplier_onboarding_case', 'doc_id': 'supplier_onboarding_case', 'description': 'Borrow context from supplier_onboarding_case through related_supplier_onboarding_case.'}, {'field_id': 'related_supplier_compliance_record', 'doc_id': 'supplier_compliance_record', 'description': 'Borrow context from supplier_compliance_record through related_supplier_compliance_record.'}, {'field_id': 'related_supplier_profile', 'doc_id': 'supplier_profile', 'description': 'Borrow context from supplier_profile through related_supplier_profile.'}]
 
 class RelationService:
     def _bridge(self, context: dict | None = None) -> RelationResolutionService | None:
